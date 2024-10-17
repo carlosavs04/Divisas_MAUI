@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Divisas.Views.Divisas"
+             Title="Divisas">
+    <VerticalStackLayout>
+        <Label 
+            Text="Tipo de cambio"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text="$18 MXN = $1 USD"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="Large" />
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            Margin="0,15">
+            <VerticalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="10">
+                    <Label 
+                        Text="MXN"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        FontSize="Large" />
+                    <Image 
+                        Source="mexico.png"
+                        HeightRequest="80"
+                        Aspect="AspectFit"/>
+                    <Entry
+                        x:Name="entryExchange"
+                        Background="#FFF1EEEE"
+                        Keyboard="Numeric"
+                        FontSize="Large"
+                        TextColor="Black"
+                        Placeholder="$0.00" />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                    <Label 
+                        Text="="
+                        HorizontalOptions="Center"
+                        FontSize="Title"
+                        Margin="10" />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="10">
+                    <Label 
+                        Text="USD"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        FontSize="Large" />
+                        <Image
+                            Source="unitedstates.png"
+                            HeightRequest="80"/>
+                        <Entry
+                            x:Name="outExchange"
+                            Background="#FFF1EEEE"
+                            Placeholder="$0.00"
+                            FontSize="Large"
+                            TextColor="Black"
+                            Keyboard="Numeric"
+                            IsReadOnly="True" />   
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -7,9 +7,18 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Divisas">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <TabBar Shell.TabBarBackgroundColor="Transparent" Shell.TabBarTitleColor="#000" Shell.TabBarUnselectedColor="DarkGray" Shell.TabBarForegroundColor="#000">
+        <Tab Title="Divisas" Icon="dollar.png"> 
+            <ShellContent 
+                          ContentTemplate="{DataTemplate local:Views.Divisas}"/>
+        </Tab>        
+        <Tab Title="Inicio" Icon="home.png">
+            <ShellContent 
+                          ContentTemplate="{DataTemplate local:Views.Home}"/>
+        </Tab>
+        <Tab Title="Menu" Icon="bars.png">
+            <ShellContent 
+                          ContentTemplate="{DataTemplate local:Views.Config}"/>
+        </Tab> 
+    </TabBar>
 </Shell>
