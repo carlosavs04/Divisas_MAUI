@@ -14,7 +14,7 @@ namespace Divisas.DataAccess
         public CurrencyDbContext(DbContextOptions<CurrencyDbContext> options) : base(options) { }
 
         public virtual DbSet<Entities.Currency> Currencies { get; set; }
-        public virtual DbSet<Entities.ExchangeRateHistory> ExchangeRateHistories { get; set; }
+        public virtual DbSet<Entities.ExchangeRateHistory> ExchangeRateHistory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

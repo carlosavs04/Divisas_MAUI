@@ -1,24 +1,32 @@
-﻿using Divisas.Utils;
+﻿using Divisas.Services;
+using Divisas.Utils;
 using Divisas.Utils.Test;
 
 namespace Divisas
 {
     public partial class App : Application
     {
+        private readonly IServiceProvider _serviceProvider;
         public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
-            if (serviceProvider == null)
-                throw new ArgumentNullException();
+            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
             SeedDatabase.Initialize(serviceProvider);
-            
-            //TEST
-            /*var viewer = serviceProvider.GetRequiredService<DatabaseViewer>();
-            viewer.ShowDatabaseContents();*/
 
             MainPage = new AppShell();
+        }
+
+        protected override async void OnStart()
+        {
+            var updateService = _serviceProvider.GetRequiredService<CurrencyRateUpdateService>();
+            await updateService.UpdateRatesAsync();
+
+            //TEST
+            /*var viewer = _serviceProvider.GetRequiredService<DatabaseViewer>();
+            viewer.ShowDatabaseContents();*/
+            base.OnStart();
         }
     }
 }

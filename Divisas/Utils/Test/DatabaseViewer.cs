@@ -20,7 +20,7 @@ namespace Divisas.Utils.Test
         public void ShowDatabaseContents()
         {
             var currencies = _ctx.Currencies.ToList();
-            var exchangeRateHistories = _ctx.ExchangeRateHistories.ToList();
+            var exchangeRateHistories = _ctx.ExchangeRateHistory.ToList();
 
             var currencyMsg = "Currencies:\n";
             foreach (var currency in currencies)
