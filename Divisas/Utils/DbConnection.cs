@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Divisas.Utils
 {
-    public class DbConection
+    public class DbConnection
     {
         public static string GetDbPath(string dbName)
         {
