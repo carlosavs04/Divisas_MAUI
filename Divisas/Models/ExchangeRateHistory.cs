@@ -9,7 +9,7 @@ namespace Divisas.Models
     public class ExchangeRateHistory
     {
         public int Id { get; set; }
-        public int CurrencyId { get; set; }
+        public int? CurrencyId { get; set; }
         public decimal Rate { get; set; }
         public DateTime Date { get; set; }
     }

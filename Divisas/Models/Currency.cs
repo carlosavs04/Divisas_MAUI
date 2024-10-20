@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -21,15 +22,16 @@ namespace Divisas.Models
         public required string Name { get; set; }
 
         [MaxLength(50)]
-        public required string Flag { get; set; }
+        public string? Flag { get; set; }
 
-        [Required]
         public bool IsActive { get; set; }
 
-        [Required]
         public bool IsBase { get; set; }
 
-        [Required]
         public bool IsDefault { get; set; }
+
+        public decimal? ActualRate { get; set; }
+
+        public decimal? SuggestedRetailPrice { get; set; }
     }
 }

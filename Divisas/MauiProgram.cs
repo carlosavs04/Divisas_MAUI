@@ -29,6 +29,8 @@ namespace Divisas
                 options.UseSqlite($"Filename={dbPath}");
             });
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             var a = Assembly.GetExecutingAssembly();
             using var stream = a.GetManifestResourceStream("Divisas.appsettings.json");
 
