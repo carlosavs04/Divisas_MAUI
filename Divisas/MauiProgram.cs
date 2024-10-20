@@ -46,6 +46,8 @@ namespace Divisas
             builder.Services.Configure<ExchangeRateApiConfig>(builder.Configuration.GetSection("ExchangeRateApi"));
             builder.Services.AddHttpClient<ExchangeRateApiService>();
             builder.Services.AddTransient<CurrencyRateUpdateService>();
+            builder.Services.AddTransient<CurrencyService>();
+            builder.Services.AddTransient<RateHistoryService>();
 
             //TEST
             //builder.Services.AddTransient<DatabaseViewer>();
