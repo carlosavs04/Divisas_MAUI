@@ -44,6 +44,7 @@ namespace Divisas.ViewModels
         public CurrenciesListViewModel(CurrencyService currencyService)
         {
             _currencyService = currencyService;
+            _searchText = string.Empty;
             Currencies = new ObservableCollection<Models.Currency>();
             FilteredCurrencies = new ObservableCollection<Models.Currency>();
             LoadCurrenciesCommand = new Command(async () => await LoadCurrenciesAsync());
