@@ -2,11 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Divisas.Views.Config"
-             Title="Config">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Configuración">
+             <ScrollView>
+                <VerticalStackLayout Background="White">
+                    <Label Margin="20,20,0,0"
+                        Text="Configuración"
+                        FontSize="18"
+                        TextColor="Gray"/>
+                        <VerticalStackLayout
+                        Margin="20,10">
+                        <Label Text="Modo oscuro"/>
+                            <Switch IsToggled="true"
+                                ThumbColor="Blue"/>
+                        </VerticalStackLayout>
+                </VerticalStackLayout>
+             </ScrollView>
 </ContentPage>

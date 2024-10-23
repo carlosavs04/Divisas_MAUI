@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Divisas.Views.CurrenciesList"
+             Title="Mis monedas">
+             <ScrollView>
+                <VerticalStackLayout Background="White">
+                    <HorizontalStackLayout
+                        HorizontalOptions="Center"
+                        Spacing="100"
+                        Margin="10,10,10,40" >
+                        <Label 
+                            Text="Moneda base" 
+                            FontSize="Header" />
+                        <Label 
+                            Text="USD" 
+                            FontSize="Header" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="USD" FontSize="Header" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </HorizontalStackLayout>
+                    <Label Margin="20,0,0,0"
+                        Text="Divisas"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="Gray"/>
+                    <ListView x:Name="CurrenciesListView"
+                        ItemsSource="{Binding Currencies}">
+                        <ListView.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Tapped="NavigateToCurrencyDetail"
+                                NumberOfTapsRequired="1" />
+                        </ListView.GestureRecognizers>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+             </ScrollView>
+</ContentPage>
