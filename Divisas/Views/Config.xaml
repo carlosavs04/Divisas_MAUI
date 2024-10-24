@@ -9,12 +9,29 @@
                         Text="Configuración"
                         FontSize="18"
                         TextColor="Gray"/>
-                        <VerticalStackLayout
-                        Margin="20,10">
-                        <Label Text="Modo oscuro"/>
-                            <Switch IsToggled="true"
-                                ThumbColor="Blue"/>
-                        </VerticalStackLayout>
+                    <HorizontalStackLayout
+                        Margin="20,10"
+                        Spacing="200">
+                    <Label 
+                        Text="Cambiar tema"
+                        Margin="0,5"
+                        FontSize="16"/>
+                        <Switch IsToggled="true"
+                            ThumbColor="DodgerBlue"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                            Margin="20,10"
+                            Spacing="170">
+                        <Label 
+                            Text="Moneda base"
+                            FontSize="16"
+                            Margin="0,5"/>
+                        <Picker x:Name="currencyPicker"
+                            Title="Moneda"
+                            ItemsSource="{Binding currencies}"
+                            ItemDisplayBinding="{Binding Code}">
+                        </Picker>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
              </ScrollView>
 </ContentPage>
