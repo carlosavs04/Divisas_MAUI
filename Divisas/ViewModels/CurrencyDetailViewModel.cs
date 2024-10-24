@@ -30,7 +30,7 @@ namespace Divisas.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
-        public CurrencyDetailViewModel(CurrencyService currencyService, int currencyId)
+        public CurrencyDetailViewModel(CurrencyService currencyService, int currencyId, ConfigurationService configService) : base(configService)
         {
             _currencyService = currencyService;
             _currencyId = currencyId;

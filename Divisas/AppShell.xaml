@@ -8,10 +8,7 @@
     Title="Divisas">
 
     <TabBar Shell.TabBarBackgroundColor="Transparent" Shell.TabBarTitleColor="#000" Shell.TabBarUnselectedColor="DarkGray" Shell.TabBarForegroundColor="#000">
-        <Tab Title="Divisas" Icon="dollar.png"> 
-            <ShellContent 
-                          ContentTemplate="{DataTemplate local:Views.CurrenciesList}"/>
-        </Tab>        
+        <Tab Title="Divisas" Icon="dollar.png" x:Name="currenciesTab" />
         <Tab Title="Inicio" Icon="home.png">
             <ShellContent 
                           ContentTemplate="{DataTemplate local:Views.Home}"/>

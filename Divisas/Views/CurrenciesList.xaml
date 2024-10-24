@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Divisas.Views.CurrenciesList"
-             Title="Mis monedas">
+             Title="Mis divisas">
              <ScrollView>
                 <VerticalStackLayout Background="White">
                     <HorizontalStackLayout
@@ -12,34 +12,50 @@
                         <Label 
                             Text="Moneda base" 
                             FontSize="Header" />
-                        <Label 
-                            Text="USD" 
+                        <Label  
                             FontSize="Header" >
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="USD" FontSize="Header" FontAttributes="Bold"/>
+                                    <Span Text="{Binding BaseCurrency}" FontSize="Header" FontAttributes="Bold"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
                     </HorizontalStackLayout>
+                    <SearchBar
+                        Placeholder="Buscar divisa..."
+                        Text="{Binding SearchText, Mode=TwoWay}"
+                        HeightRequest="40"
+                        FontSize="14"
+                        Margin="0,0,0,25"/>
                     <Label Margin="20,0,0,0"
-                        Text="Divisas"
+                        Text="DIVISAS"
                         FontSize="14"
                         FontAttributes="Bold"
                         TextColor="Gray"/>
                     <ListView x:Name="CurrenciesListView"
-                        ItemsSource="{Binding Currencies}">
-                        <ListView.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                Tapped="NavigateToCurrencyDetail"
-                                NumberOfTapsRequired="1" />
-                        </ListView.GestureRecognizers>
+                        ItemsSource="{Binding FilteredCurrencies}"
+                        RowHeight="70">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Name}"/>
+                                <ViewCell>
+                                    <StackLayout Padding="10">
+                                        <Label Text="{Binding Code}" 
+                                            FontSize="Medium" 
+                                            FontAttributes="Bold" />
+                                        <Label Text="{Binding Name}"
+                                               FontSize="Small" 
+                                               LineBreakMode="WordWrap"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Tapped="NavigateToCurrencyDetail"
+                                                NumberOfTapsRequired="1" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
                 </VerticalStackLayout>
              </ScrollView>
 </ContentPage>

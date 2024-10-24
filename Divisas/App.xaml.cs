@@ -15,7 +15,7 @@ namespace Divisas
 
             SeedDatabase.Initialize(serviceProvider);
 
-            MainPage = new AppShell();
+            MainPage = new AppShell(_serviceProvider);
         }
 
         protected override async void OnStart()
