@@ -29,7 +29,13 @@
                             <Image 
                                 Source="mx_flag.png"
                                 HeightRequest="80"
-                                Aspect="AspectFit"/>
+                                Aspect="AspectFit"
+                                >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                     Tapped="TapGestureRecognizer_Tapped"/>
+                            </Image.GestureRecognizers>
+                            </Image>
                             <Entry
                                 x:Name="entryExchange"
                                 Background="#FFF1EEEE"

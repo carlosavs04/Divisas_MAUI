@@ -6,4 +6,10 @@ public partial class Home : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+		Console.WriteLine("Tapped");
+		Navigation.PushModalAsync(new Divisas());
+    }
 }

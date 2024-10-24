@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Divisas.Views.NewCurrency"
+             Title="Nueva divisa">
+             <ScrollView>
+                <VerticalStackLayout>
+                    <Image
+                        WidthRequest="200"
+                        Margin="0,20"
+                        Source="mx_flag.png"/>
+                    <HorizontalStackLayout
+                        WidthRequest="300"
+                        Spacing="100">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Header"
+                                Text="Valor venta"/>
+                            <Label
+                                FontSize="Header"
+                                Text="$19.58"
+                                HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Header"
+                                Text="Valor compra"/>
+                            <Label
+                                FontSize="Header"
+                                Text="$19.58"
+                                HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                    <Label
+                        Margin="10"
+                        FontSize="Header"
+                        HorizontalOptions="Center" 
+                        Text="Moneda base"/>
+                    <Label
+                        HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span 
+                                    Text="USD" 
+                                    FontAttributes="Bold"
+                                    FontSize="Header"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <VerticalStackLayout
+                        Margin="10,10,10,10">
+                        <Label 
+                            Margin="10,10,10,0" 
+                            FontSize="Header" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Código" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Entry
+                            Background="LightGray"
+                            Margin="10,10,10,10"/>
+                        <Label 
+                            Margin="10,10,10,0" 
+                            FontSize="Header" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Nombre" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Entry
+                            Background="LightGray"
+                            Margin="10,10,10,10"/>
+                            <Label 
+                                Margin="10,10,10,0" 
+                                FontSize="Header" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Valor equivalente a 1 USD" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Entry
+                            Background="LightGray"
+                            Margin="10,10,10,10"/>
+                    </VerticalStackLayout>
+                    <HorizontalStackLayout 
+                        Margin="0,20"
+                        HorizontalOptions="Center"
+                        Spacing="40">
+                        <Button 
+                            Text="Cancelar"
+                            FontSize="18"
+                            Padding="40,0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Background="LightGray"
+                            TextColor="DodgerBlue" />
+                        <Button 
+                            Text="Guardar"
+                            FontSize="18"
+                            Padding="40,0"
+                            VerticalOptions="Center"
+                            BackgroundColor="DodgerBlue"
+                            HorizontalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+</ContentPage>

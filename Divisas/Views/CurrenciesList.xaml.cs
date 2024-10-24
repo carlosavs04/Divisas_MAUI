@@ -23,4 +23,9 @@ public partial class CurrenciesList : ContentPage
     {
         Navigation.PushAsync(new CurrencyDetail());
     }
+
+    private void NavigateToNewCurrency(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new NewCurrency());
+    }
 }
