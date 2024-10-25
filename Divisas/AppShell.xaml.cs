@@ -14,15 +14,13 @@ namespace Divisas
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
             InitTabs();
-            Routing.RegisterRoute(nameof(CurrenciesList), typeof(CurrenciesList));
-            Routing.RegisterRoute(nameof(CurrencyDetail), typeof(CurrencyDetail));
         }
 
         private void InitTabs()
         {
-            var currenciesListPagee = _serviceProvider.GetRequiredService<CurrenciesList>();
+            var currenciesListPage = _serviceProvider.GetRequiredService<CurrenciesList>();
 
-            currenciesTab.Items.Add(new ShellContent { Content = currenciesListPagee });
+            currenciesTab.Items.Add(new ShellContent { Content = currenciesListPage });
         }
     }
 }

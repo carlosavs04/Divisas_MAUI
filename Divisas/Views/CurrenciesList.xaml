@@ -52,7 +52,8 @@
                                            <StackLayout.GestureRecognizers>
                                                <TapGestureRecognizer
                                                    Tapped="NavigateToCurrencyDetail"
-                                                   NumberOfTapsRequired="1" />
+                                                   NumberOfTapsRequired="1" 
+                                                   CommandParameter="{Binding}" />
                                            </StackLayout.GestureRecognizers>
                                        </StackLayout>
                                    </ViewCell>

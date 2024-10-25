@@ -8,10 +8,12 @@ namespace Divisas.Views;
 public partial class CurrenciesList : ContentPage
 {
     private CurrenciesListViewModel _viewModel;
+    private IServiceProvider _serviceProvider;
 
     public CurrenciesList(IServiceProvider serviceProvider)
     {
         InitializeComponent();
+        _serviceProvider = serviceProvider;
         var locator = serviceProvider.GetRequiredService<ViewModelLocator>();
         _viewModel = locator.CurrenciesListViewModel;
         BindingContext = _viewModel;
@@ -19,19 +21,24 @@ public partial class CurrenciesList : ContentPage
 
     protected override void OnAppearing()
     {
+        _viewModel.IsLoading = false;
         base.OnAppearing();
 
         if (!_viewModel.IsLoading && _viewModel.Currencies.Count == 0)
             _viewModel.LoadCurrenciesCommand.Execute(null);
     }
 
-    void NavigateToCurrencyDetail(object sender, TappedEventArgs args)
+    private void NavigateToCurrencyDetail(object sender, TappedEventArgs args)
     {
-        Shell.Current.GoToAsync(nameof(CurrencyDetail));
+        if (args.Parameter is Models.Currency selected)
+        {
+            var currencyId = selected.Id;
+            Navigation.PushAsync(new CurrencyDetail(_serviceProvider, currencyId));
+        }
     }
 
     private void NavigateToNewCurrency(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new NewCurrency());
+        Navigation.PushAsync(new NewCurrency(_serviceProvider));
     }
 }

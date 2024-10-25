@@ -55,6 +55,7 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<None Remove="Resources\Images\default_flag.png" />
 
 		<EmbeddedResource Include="appsettings.json" />
 	</ItemGroup>

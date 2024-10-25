@@ -21,7 +21,17 @@ namespace Divisas.ViewModels
         public Models.Currency? Currency
         {
             get => _currency;
-            set => SetProperty(ref _currency, value);
+            set
+            {
+                SetProperty(ref _currency, value);
+                OnPropertyChanged(nameof(FlagImagePath));
+                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged(nameof(Code));
+                OnPropertyChanged(nameof(ActualRate));
+                OnPropertyChanged(nameof(SuggestedRetailPrice));
+                OnPropertyChanged(nameof(IsDeleteButtonVisible));
+            }
+
         }
 
         public bool IsLoading
@@ -30,13 +40,23 @@ namespace Divisas.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
-        public CurrencyDetailViewModel(CurrencyService currencyService, int currencyId, ConfigurationService configService) : base(configService)
+        public string FlagImagePath => Currency != null ? $"{Currency.Flag}.png" : "default_flag.png";
+        public string Name => Currency?.Name ?? "Unknown";
+        public string Code => Currency?.Code ?? "Unknown";
+        public string ActualRate => Currency != null ? $"{Currency.ActualRate:C2}" : "$0.00";
+        public string SuggestedRetailPrice => Currency != null ? $"{Currency.SuggestedRetailPrice:C2}" : "$0.00";
+        public bool IsDeleteButtonVisible => Currency != null && !Currency.IsBase && !Currency.IsDefault;
+
+        public CurrencyDetailViewModel(CurrencyService currencyService, ConfigurationService configService) : base(configService)
         {
             _currencyService = currencyService;
-            _currencyId = currencyId;
             LoadCurrencyCommand = new Command(async () => await LoadCurrencyAsync());
             DeleteCurrencyCommand = new Command(async () => await DeleteCurrencyAsync());
-            LoadCurrencyCommand.Execute(null);
+        }
+
+        public void Initialize(int currencyId)
+        {
+            _currencyId = currencyId;
         }
 
         private async Task LoadCurrencyAsync()

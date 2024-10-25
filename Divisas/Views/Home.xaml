@@ -80,6 +80,5 @@
                                     IsReadOnly="True" />   
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
-            <
             </VerticalStackLayout>
 </ContentPage>
