@@ -3,6 +3,8 @@ using Divisas.Models;
 using Divisas.Services;
 using Divisas.Utils;
 using Divisas.Utils.Test;
+using Divisas.ViewModels;
+using Divisas.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -45,9 +47,20 @@ namespace Divisas
 
             builder.Services.Configure<ExchangeRateApiConfig>(builder.Configuration.GetSection("ExchangeRateApi"));
             builder.Services.AddHttpClient<ExchangeRateApiService>();
+            builder.Services.AddSingleton<ViewModelLocator>();
+
+            builder.Services.AddTransient<UserPreferences>();
             builder.Services.AddTransient<CurrencyRateUpdateService>();
             builder.Services.AddTransient<CurrencyService>();
             builder.Services.AddTransient<RateHistoryService>();
+            builder.Services.AddTransient<ConfigurationService>();
+
+            builder.Services.AddTransient<CurrenciesListViewModel>();
+            builder.Services.AddTransient<CurrencyDetailViewModel>();
+            builder.Services.AddTransient<AddCurrencyViewModel>();
+            builder.Services.AddTransient<UpdateCurrencyViewModel>();
+
+            builder.Services.AddTransient<CurrenciesList>();
 
             //TEST
             //builder.Services.AddTransient<DatabaseViewer>();

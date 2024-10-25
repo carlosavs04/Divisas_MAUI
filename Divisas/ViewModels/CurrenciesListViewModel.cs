@@ -41,7 +41,7 @@ namespace Divisas.ViewModels
             }
         }
 
-        public CurrenciesListViewModel(CurrencyService currencyService)
+        public CurrenciesListViewModel(CurrencyService currencyService, ConfigurationService configService) : base(configService)
         {
             _currencyService = currencyService;
             _searchText = string.Empty;

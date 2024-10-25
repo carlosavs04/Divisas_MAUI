@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Divisas.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +11,22 @@ namespace Divisas.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private ConfigurationService _configService;
+
         public event PropertyChangedEventHandler? PropertyChanged;
+        public string _baseCurrency;
+
+        public BaseViewModel(ConfigurationService configurationService)
+        {
+            _configService = configurationService;
+            _baseCurrency = _configService.GetDefaultCurrency();
+        }
+
+        public string BaseCurrency
+        {
+            get => _baseCurrency;
+            set => SetProperty(ref _baseCurrency, value, () => _configService.SetBaseCurrency(value));
+        }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {

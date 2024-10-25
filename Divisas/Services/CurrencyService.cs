@@ -132,5 +132,23 @@ namespace Divisas.Services
             currency.IsActive = false;
             await _ctx.SaveChangesAsync();
         }
+
+        public async Task<Models.ConversionResult> ConvertCurrencyAsync(int fromCurrencyId, int toCurrencyId, decimal amount)
+        {
+            var fromRate = await GetActualRateAsync(fromCurrencyId);
+            var toRate = await GetActualRateAsync(toCurrencyId);
+
+            if (fromRate == 0 || toRate == 0)
+                throw new InvalidOperationException();
+
+            decimal convertedAmount = amount * (fromRate / toRate);
+            decimal suggestedRetailPrice = GetSuggestedRetailPrice(convertedAmount);
+
+            return new Models.ConversionResult
+            {
+                ConvertedAmount = convertedAmount,
+                SuggestedRetailPrice = suggestedRetailPrice
+            };
+        }
     }
 }

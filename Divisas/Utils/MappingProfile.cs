@@ -16,7 +16,6 @@ namespace Divisas.Utils
                 .ForMember(dest => dest.SuggestedRetailPrice, opt => opt.Ignore());
 
             CreateMap<DataAccess.Entities.ExchangeRateHistory, Models.ExchangeRateHistory>();
-
         }
     }
 }
