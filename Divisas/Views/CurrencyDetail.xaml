@@ -47,22 +47,27 @@
                         FontAttributes="Bold"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
-            <Label
-                Margin="10"
-                FontSize="Header"
-                HorizontalOptions="Center" 
-                Text="Moneda base"/>
-            <Label
-                HorizontalOptions="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span 
-                            Text="{Binding BaseCurrency}" 
-                            FontAttributes="Bold"
-                            FontSize="Header"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <HorizontalStackLayout
+                Margin="20"
+                WidthRequest="320"
+                Spacing="150">
+                <Label
+                    FontSize="Header"
+                    HorizontalOptions="Center" 
+                    Text="Moneda base"/>
+                <Label
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span 
+                                Text="{Binding BaseCurrency}" 
+                                FontAttributes="Bold"
+                                FontSize="Header"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </HorizontalStackLayout>
             <VerticalStackLayout
                 Margin="10,10,10,10">
                 <Label 
