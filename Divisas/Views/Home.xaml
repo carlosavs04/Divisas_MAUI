@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              x:Class="Divisas.Views.Home"
              Title="Home">
              <VerticalStackLayout>
@@ -33,7 +34,7 @@
                                 >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer
-                                     Tapped="TapGestureRecognizer_Tapped"/>
+                                     Tapped="ShowAvailableCurrencies"/>
                             </Image.GestureRecognizers>
                             </Image>
                             <Entry
@@ -67,7 +68,7 @@
                                     HeightRequest="80">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer
-                                             Tapped="TapGestureRecognizer_Tapped"/>
+                                             Tapped="ShowAvailableCurrencies"/>
                                     </Image.GestureRecognizers>
                                 </Image>
                                 <Entry
@@ -80,6 +81,28 @@
                                     IsReadOnly="True" />   
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
-            <
+                <VerticalStackLayout 
+                    Margin="0,60">
+                    <chart:SfCartesianChart
+                        WidthRequest="350">
+                        <chart:SfCartesianChart.Title>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Valores de la moneda"
+                                HorizontalOptions="Center"/>
+                        </chart:SfCartesianChart.Title> 
+                        <chart:SfCartesianChart.XAxes>
+                            <chart:CategoryAxis/>
+                        </chart:SfCartesianChart.XAxes>
+                        <chart:SfCartesianChart.YAxes>
+                            <chart:NumericalAxis/>
+                        </chart:SfCartesianChart.YAxes>  
+                        <chart:LineSeries
+                            ShowMarkers="True"
+                            XBindingPath="Date"
+                            ItemsSource="{Binding Data}"
+                            YBindingPath="Rate"/>
+                    </chart:SfCartesianChart>
+                </VerticalStackLayout>
             </VerticalStackLayout>
 </ContentPage>
