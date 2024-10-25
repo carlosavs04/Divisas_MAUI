@@ -15,25 +15,38 @@ namespace Divisas.ViewModels
         private string _name;
         private decimal? _actualRate;
         private bool _isLoading;
+        private bool _canSave;
 
         public ICommand CreateCurrencyCommand { get; }
 
         public string Code
         {
             get => _code;
-            set => SetProperty(ref _code, value);
+            set
+            {
+                SetProperty(ref _code, value);
+                Validate();
+            }
         }
 
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value);
+            set
+            {
+                SetProperty(ref _name, value);
+                Validate();
+            }
         }
 
         public decimal? ActualRate
         {
             get => _actualRate;
-            set => SetProperty(ref _actualRate, value);
+            set
+            {
+                SetProperty(ref _actualRate, value);
+                Validate();
+            }
         }
 
         public bool IsLoading
@@ -42,12 +55,18 @@ namespace Divisas.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
+        public bool CanSave
+        {
+            get => _canSave;
+            private set => SetProperty(ref _canSave, value);
+        }
+
         public AddCurrencyViewModel(CurrencyService currencyService, ConfigurationService configService) : base(configService)
         {
             _currencyService = currencyService;
             _code = string.Empty;
             _name = string.Empty;
-            CreateCurrencyCommand = new Command(async () => await AddCurrencyAsync());
+            CreateCurrencyCommand = new Command(async () => await AddCurrencyAsync(), () => CanSave);
         }
 
         private async Task AddCurrencyAsync()
@@ -78,6 +97,12 @@ namespace Divisas.ViewModels
             {
                 IsLoading = false;
             }
+        }
+
+        private void Validate()
+        {
+            CanSave = !string.IsNullOrWhiteSpace(Code) && !string.IsNullOrWhiteSpace(Name) && ActualRate.HasValue;
+            ((Command)CreateCurrencyCommand).ChangeCanExecute();
         }
     }
 }

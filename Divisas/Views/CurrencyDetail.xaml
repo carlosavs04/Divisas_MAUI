@@ -2,33 +2,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Divisas.Views.CurrencyDetail"
-             Title="Peso mexicano">
+             Title="{Binding Currency.Code}">
+    <ContentPage.Resources>
+        <Style x:Key="CustomEntryStyle" TargetType="Entry">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="HeightRequest" Value="40" />
+        </Style>
+        <Style x:Key="CustomFrameStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#F0F0F0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout>
             <Image
                 WidthRequest="200"
                 Margin="0,20"
-                Source="mx_flag.png"/>
+                Source="{Binding FlagImagePath}"/>
             <HorizontalStackLayout
                 WidthRequest="300"
                 Spacing="100">
                 <VerticalStackLayout>
                     <Label
                         FontSize="Header"
-                        Text="Valor venta"/>
+                        Text="Valor actual"/>
                     <Label
                         FontSize="Header"
-                        Text="$19.58"
-                        HorizontalOptions="Center"/>
+                        Text="{Binding ActualRate}"
+                        HorizontalOptions="Center"
+                        FontAttributes="Bold"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label
                         FontSize="Header"
-                        Text="Valor compra"/>
+                        Text="Valor venta"/>
                     <Label
                         FontSize="Header"
-                        Text="$19.58"
-                        HorizontalOptions="Center"/>
+                        Text="{Binding SuggestedRetailPrice}"
+                        HorizontalOptions="Center"
+                        FontAttributes="Bold"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
             <Label
@@ -41,7 +57,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span 
-                            Text="USD" 
+                            Text="{Binding BaseCurrency}" 
                             FontAttributes="Bold"
                             FontSize="Header"/>
                     </FormattedString>
@@ -58,9 +74,31 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry
-                    Background="LightGray"
-                    Margin="10,10,10,10"/>
+                <Frame Style="{StaticResource CustomFrameStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry
+                            Text="{Binding Code}"
+                            Style="{StaticResource CustomEntryStyle}"
+                            IsReadOnly="True" />
+                        <Image Source="pen_solid.svg"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               Margin="5,0,5,0"
+                               IsVisible="{Binding IsEditable}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="NavigateToEditionMode"
+                                    NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
                 <Label 
                     Margin="10,10,10,0" 
                     FontSize="Header" >
@@ -70,21 +108,67 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry
-                    Background="LightGray"
-                    Margin="10,10,10,10"/>
-                    <Label 
+                <Frame Style="{StaticResource CustomFrameStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry
+                            Text="{Binding Name}"
+                            Style="{StaticResource CustomEntryStyle}"
+                            IsReadOnly="True"/>
+                        <Image Source="pen_solid.svg"
+                           WidthRequest="20"
+                           HeightRequest="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="5,0,5,0"
+                           IsVisible="{Binding IsEditable}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="NavigateToEditionMode"
+                                    NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                    </Grid>
+                </Frame>
+                <Label 
                         Margin="10,10,10,0" 
                         FontSize="Header" >
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Valor equivalente a 1 USD" FontAttributes="Bold"/>
+                            <Span Text="Valor equivalente a 1 " FontAttributes="Bold"/>
+                            <Span Text="{Binding BaseCurrency}" FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry
-                    Background="LightGray"
-                    Margin="10,10,10,10"/>
+                <Frame Style="{StaticResource CustomFrameStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry
+                        Text="{Binding ActualRate}"
+                        Style="{StaticResource CustomEntryStyle}"
+                        IsReadOnly="True"/>
+                        <Image Source="pen_solid.svg"
+                           WidthRequest="20"
+                           HeightRequest="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="5,0,5,0"
+                           IsVisible="{Binding IsEditable}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="NavigateToEditionMode"
+                                    NumberOfTapsRequired="1" />         
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
             </VerticalStackLayout>
             <HorizontalStackLayout 
                 Margin="0,20"
@@ -97,8 +181,11 @@
                     Padding="40,0"
                     VerticalOptions="Center"
                     BackgroundColor="Red"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsEditable}"
+                    Command="{Binding DeleteCurrencyCommand}"/>
             </HorizontalStackLayout>
+            <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
