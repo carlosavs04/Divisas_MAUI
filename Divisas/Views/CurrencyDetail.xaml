@@ -91,19 +91,12 @@
                 HorizontalOptions="Center"
                 Spacing="40">
                 <Button 
-                    Text="Cancelar"
+                    Text="Eliminar"
+                    TextColor="White"
                     FontSize="18"
                     Padding="40,0"
                     VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Background="LightGray"
-                    TextColor="DodgerBlue" />
-                <Button 
-                    Text="Guardar"
-                    FontSize="18"
-                    Padding="40,0"
-                    VerticalOptions="Center"
-                    BackgroundColor="DodgerBlue"
+                    BackgroundColor="Red"
                     HorizontalOptions="Center" />
             </HorizontalStackLayout>
         </VerticalStackLayout>

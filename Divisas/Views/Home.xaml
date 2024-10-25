@@ -64,7 +64,12 @@
                                 FontSize="Large" />
                                 <Image
                                     Source="us_flag.png"
-                                    HeightRequest="80"/>
+                                    HeightRequest="80">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                             Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
                                 <Entry
                                     x:Name="outExchange"
                                     Background="#FFF1EEEE"
@@ -75,5 +80,6 @@
                                     IsReadOnly="True" />   
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
+            <
             </VerticalStackLayout>
 </ContentPage>
