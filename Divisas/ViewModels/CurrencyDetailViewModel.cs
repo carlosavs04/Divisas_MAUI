@@ -1,4 +1,5 @@
 ﻿using Divisas.Services;
+using Divisas.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Divisas.ViewModels
                 OnPropertyChanged(nameof(Code));
                 OnPropertyChanged(nameof(ActualRate));
                 OnPropertyChanged(nameof(SuggestedRetailPrice));
-                OnPropertyChanged(nameof(IsDeleteButtonVisible));
+                OnPropertyChanged(nameof(IsEditable));
             }
 
         }
@@ -43,9 +44,9 @@ namespace Divisas.ViewModels
         public string FlagImagePath => Currency != null ? $"{Currency.Flag}.png" : "default_flag.png";
         public string Name => Currency?.Name ?? "Unknown";
         public string Code => Currency?.Code ?? "Unknown";
-        public string ActualRate => Currency != null ? $"{Currency.ActualRate:C2}" : "$0.00";
-        public string SuggestedRetailPrice => Currency != null ? $"{Currency.SuggestedRetailPrice:C2}" : "$0.00";
-        public bool IsDeleteButtonVisible => Currency != null && !Currency.IsBase && !Currency.IsDefault;
+        public string ActualRate => Currency != null ? $"{Currency.ActualRate:C3}" : "$0.00";
+        public string SuggestedRetailPrice => Currency != null ? $"{Currency.SuggestedRetailPrice:C3}" : "$0.00";
+        public bool IsEditable => Currency != null && !Currency.IsBase && !Currency.IsDefault;
 
         public CurrencyDetailViewModel(CurrencyService currencyService, ConfigurationService configService) : base(configService)
         {
@@ -80,6 +81,14 @@ namespace Divisas.ViewModels
         public async Task DeleteCurrencyAsync()
         {
             if (IsLoading || Currency == null)
+                return;
+
+            bool confirm = await DialogsHelper.ShowWarningMessage(
+                "Confirmar eliminación", 
+                "¿Estás seguro que deseas eliminar esta divisa? Una vez que lo hagas no volverás a poder utilizarla ni ver su información"
+            );
+
+            if (!confirm)
                 return;
 
             try

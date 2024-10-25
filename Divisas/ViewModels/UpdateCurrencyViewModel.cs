@@ -14,9 +14,7 @@ namespace Divisas.ViewModels
         private Models.Currency? _currency;
         private bool _isLoading;
         private int _currencyId;
-        private string _code;
-        private string _name;
-        private decimal? _actualRate;
+        private bool _canSave;
 
         public ICommand LoadCurrencyCommand { get; }
         public ICommand UpdateCurrencyCommand { get; }
@@ -29,20 +27,45 @@ namespace Divisas.ViewModels
 
         public string Code
         {
-            get => _code;
-            set => SetProperty(ref _code, value);
+            get => Currency?.Code ?? string.Empty;
+            set 
+            {
+                if (Currency != null)
+                {
+                    Currency.Code = value;
+                    OnPropertyChanged(nameof(Code));
+                    Validate();
+                }
+            }
+
         }
 
         public string Name
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => Currency?.Name ?? string.Empty;
+            set
+            {
+                if (Currency != null)
+                {
+                    Currency.Name = value;
+                    OnPropertyChanged(nameof(Name));
+                    Validate();
+                }
+            }
         }
 
         public decimal? ActualRate
         {
-            get => _actualRate;
-            set => SetProperty(ref _actualRate, value);
+            get => Currency?.ActualRate ?? 0;
+            set
+            {
+                if (Currency != null)
+                {
+                    Currency.ActualRate = value;
+                    OnPropertyChanged(nameof(ActualRate));
+                    Validate();
+                }
+            }
         }
 
         public bool IsLoading
@@ -51,15 +74,22 @@ namespace Divisas.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
-        public UpdateCurrencyViewModel(CurrencyService currencyService, int currencyId, ConfigurationService configService) : base(configService)
+        public bool CanSave
+        {
+            get => _canSave;
+            private set => SetProperty(ref _canSave, value);
+        }
+
+        public UpdateCurrencyViewModel(CurrencyService currencyService, ConfigurationService configService) : base(configService)
         {
             _currencyService = currencyService;
-            _currencyId = currencyId;
-            _code = string.Empty;
-            _name = string.Empty;
             LoadCurrencyCommand = new Command(async () => await LoadCurrencyAsync());
-            UpdateCurrencyCommand = new Command(async () => await UpdateCurrencyAsync());
-            LoadCurrencyCommand.Execute(null);
+            UpdateCurrencyCommand = new Command(async () => await UpdateCurrencyAsync(), () => CanSave);
+        }
+
+        public void Initialize(int currencyId)
+        {
+            _currencyId = currencyId;
         }
 
         private async Task LoadCurrencyAsync()
@@ -99,21 +129,19 @@ namespace Divisas.ViewModels
                 IsLoading = true;
                 await Task.Delay(100);
 
-                var updatedCurrency = new Models.Currency
-                {
-                    Id = _currencyId,
-                    Code = Code,
-                    Name = Name,
-                    ActualRate = ActualRate
-                };
-
-                await _currencyService.UpdateCurrencyAsync(updatedCurrency);
+                await _currencyService.UpdateCurrencyAsync(Currency);
             }
 
             finally
             {
                 IsLoading = false;
             }
+        }
+
+        private void Validate()
+        {
+            CanSave = !string.IsNullOrWhiteSpace(Code) && !string.IsNullOrWhiteSpace(Name) && ActualRate.HasValue;
+            ((Command)UpdateCurrencyCommand).ChangeCanExecute();
         }
     }
 }

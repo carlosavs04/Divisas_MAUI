@@ -85,7 +85,7 @@
                             <Entry
                                 Placeholder="0.00"
                                 Style="{StaticResource CustomEntryStyle}" 
-                                Text="{Binding ActualRate, StringFormat='{}{0:0.##}'}"
+                                Text="{Binding ActualRate, StringFormat='{}{0:0.###}'}"
                                 Keyboard="Numeric"/>
                         </Frame>
                     </VerticalStackLayout>

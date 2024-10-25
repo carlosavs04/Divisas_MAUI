@@ -75,10 +75,29 @@
                     </Label.FormattedText>
                 </Label>
                 <Frame Style="{StaticResource CustomFrameStyle}">
-                    <Entry
-                        Text="{Binding Code}"
-                        Style="{StaticResource CustomEntryStyle}"
-                        IsReadOnly="True" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry
+                            Text="{Binding Code}"
+                            Style="{StaticResource CustomEntryStyle}"
+                            IsReadOnly="True" />
+                        <Image Source="pen_solid.svg"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               Margin="5,0,5,0"
+                               IsVisible="{Binding IsEditable}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="NavigateToEditionMode"
+                                    NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
                 </Frame>
                 <Label 
                     Margin="10,10,10,0" 
@@ -90,10 +109,30 @@
                     </Label.FormattedText>
                 </Label>
                 <Frame Style="{StaticResource CustomFrameStyle}">
-                    <Entry
-                        Text="{Binding Name}"
-                        Style="{StaticResource CustomEntryStyle}"
-                        IsReadOnly="True"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry
+                            Text="{Binding Name}"
+                            Style="{StaticResource CustomEntryStyle}"
+                            IsReadOnly="True"/>
+                        <Image Source="pen_solid.svg"
+                           WidthRequest="20"
+                           HeightRequest="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="5,0,5,0"
+                           IsVisible="{Binding IsEditable}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="NavigateToEditionMode"
+                                    NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                    </Grid>
                 </Frame>
                 <Label 
                         Margin="10,10,10,0" 
@@ -106,10 +145,29 @@
                     </Label.FormattedText>
                 </Label>
                 <Frame Style="{StaticResource CustomFrameStyle}">
-                    <Entry
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry
                         Text="{Binding ActualRate}"
                         Style="{StaticResource CustomEntryStyle}"
                         IsReadOnly="True"/>
+                        <Image Source="pen_solid.svg"
+                           WidthRequest="20"
+                           HeightRequest="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="5,0,5,0"
+                           IsVisible="{Binding IsEditable}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="NavigateToEditionMode"
+                                    NumberOfTapsRequired="1" />         
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
                 </Frame>
             </VerticalStackLayout>
             <HorizontalStackLayout 
@@ -124,7 +182,8 @@
                     VerticalOptions="Center"
                     BackgroundColor="Red"
                     HorizontalOptions="Center"
-                    IsVisible="{Binding IsDeleteButtonVisible}"/>
+                    IsVisible="{Binding IsEditable}"
+                    Command="{Binding DeleteCurrencyCommand}"/>
             </HorizontalStackLayout>
             <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
         </VerticalStackLayout>
