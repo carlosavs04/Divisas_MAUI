@@ -32,6 +32,7 @@ namespace Divisas.Services
                 Id = i.Id,
                 Code = i.Code,
                 Name = i.Name,
+                Flag = i.Flag,
                 IsBase = i.IsBase
             });
         }
@@ -141,13 +142,36 @@ namespace Divisas.Services
             if (fromRate == 0 || toRate == 0)
                 throw new InvalidOperationException();
 
-            decimal convertedAmount = amount * (fromRate / toRate);
+            decimal convertedAmount = amount * (toRate / fromRate);
             decimal suggestedRetailPrice = GetSuggestedRetailPrice(convertedAmount);
 
             return new Models.ConversionResult
             {
                 ConvertedAmount = convertedAmount,
                 SuggestedRetailPrice = suggestedRetailPrice
+            };
+        }
+
+        public async Task<IEnumerable<Models.Currency>> GetDefaultCurrenciesToConvertAsync()
+        {
+            string otherCurrencyCode = "MXN";
+            var baseCurrency = await _ctx.Currencies.FirstOrDefaultAsync(i => i.IsBase);
+
+            if (baseCurrency == null)
+                throw new InvalidOperationException();
+
+            if (baseCurrency.IsDefault && baseCurrency.Code == "MXN")
+                otherCurrencyCode = "USD";
+
+            var otherCurrency = await _ctx.Currencies.FirstOrDefaultAsync(i => i.Code == otherCurrencyCode && i.IsDefault);
+
+            if (otherCurrency == null)
+                throw new InvalidOperationException();
+
+            return new List<Models.Currency>
+            {
+                _mapper.Map<Models.Currency>(baseCurrency),
+                _mapper.Map<Models.Currency>(otherCurrency)
             };
         }
     }

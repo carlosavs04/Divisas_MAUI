@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Divisas.Views.Currencies"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.ModalPresentationStyle="FormSheet"
+             Title="Divisas">
+    <ScrollView>
+        <VerticalStackLayout
+            Margin="20">
+            <Label
+                Text="Divisas"
+                FontSize="Header"
+                HorizontalOptions="Center"
+                Margin="0,20"/>
+            <CollectionView ItemsSource="{Binding Currencies}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCurrencySelected">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="10" HorizontalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Image
+                                Source="{Binding Flag}"
+                                Aspect="AspectFill"
+                                HeightRequest="100"
+                                Margin="10" />
+                            <Label
+                                Grid.Row="1"
+                                Text="{Binding Code}"
+                                HorizontalTextAlignment="Center"
+                                HorizontalOptions="CenterAndExpand"
+                                Style="{StaticResource SecondaryEdTextLabelStyle}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

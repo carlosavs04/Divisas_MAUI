@@ -16,9 +16,11 @@ namespace Divisas.Utils
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
+        public HomeViewModel HomeViewModel => _serviceProvider.GetRequiredService<HomeViewModel>();
         public CurrenciesListViewModel CurrenciesListViewModel => _serviceProvider.GetRequiredService<CurrenciesListViewModel>();
         public CurrencyDetailViewModel CurrencyDetailViewModel => _serviceProvider.GetRequiredService<CurrencyDetailViewModel>();
         public AddCurrencyViewModel AddCurrencyViewModel => _serviceProvider.GetRequiredService<AddCurrencyViewModel>();
         public UpdateCurrencyViewModel UpdateCurrencyViewModel => _serviceProvider.GetRequiredService<UpdateCurrencyViewModel>();
+        public CurrencySelectorViewModel CurrencySelectorViewModel => _serviceProvider.GetRequiredService<CurrencySelectorViewModel>();
     }
 }

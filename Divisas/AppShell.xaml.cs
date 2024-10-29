@@ -19,8 +19,10 @@ namespace Divisas
         private void InitTabs()
         {
             var currenciesListPage = _serviceProvider.GetRequiredService<CurrenciesList>();
+            var homePage = _serviceProvider.GetRequiredService<Home>();
 
             currenciesTab.Items.Add(new ShellContent { Content = currenciesListPage });
+            homeTab.Items.Add(new ShellContent { Content = homePage });
         }
     }
 }

@@ -4,14 +4,30 @@
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              x:Class="Divisas.Views.Home"
              Title="Home">
-             <ScrollView>
+    <ContentPage.Resources>
+        <Style x:Key="CustomEntryStyle" TargetType="Entry">
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="120" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="CustomFrameStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#FFF1EEEE"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
                 <VerticalStackLayout>
                     <Label 
                         Text="Tipo de cambio"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
                     <Label 
-                        Text="$18 MXN = $1 USD"
+                        Text="{Binding ConversionText}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
                         FontSize="Large" />
@@ -24,27 +40,29 @@
                             HorizontalOptions="Center"
                             Spacing="10">
                                 <Label 
-                                    Text="MXN"
+                                    Text="{Binding FromCode}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     FontSize="Large" />
                                 <Image 
-                                    Source="mx_flag.png"
+                                    x:Name="FromCurrencyImage"
+                                    Source="{Binding FromFlagImagePath}"
                                     HeightRequest="80"
-                                    Aspect="AspectFit"
-                                    >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                         Tapped="ShowAvailableCurrencies"/>
-                                </Image.GestureRecognizers>
+                                    Aspect="AspectFit" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                             Tapped="ShowAvailableCurrencies"/>
+                                    </Image.GestureRecognizers>
                                 </Image>
-                                <Entry
-                                    x:Name="entryExchange"
-                                    Background="#FFF1EEEE"
-                                    Keyboard="Numeric"
-                                    FontSize="Large"
-                                    TextColor="Black"
-                                    Placeholder="$0.00" />
+                                <Frame Style="{StaticResource CustomFrameStyle}">
+                                    <Entry
+                                        x:Name="entryAmount"
+                                        Style="{StaticResource CustomEntryStyle}"
+                                        Text="{Binding AmountToConvert}"
+                                        Keyboard="Numeric"
+                                        Placeholder="$0.00"
+                                        Unfocused="UnfocusAmount"/>
+                                </Frame>
                         </VerticalStackLayout>
                         <VerticalStackLayout
                             VerticalOptions="Center"
@@ -60,27 +78,51 @@
                             HorizontalOptions="Center"
                             Spacing="10">
                                 <Label 
-                                    Text="USD"
+                                    Text="{Binding ToCode}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     FontSize="Large" />
-                                    <Image
-                                        Source="us_flag.png"
-                                        HeightRequest="80">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                 Tapped="ShowAvailableCurrencies"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
+                                <Image
+                                    x:Name="ToCurrencyImage"
+                                    Source="{Binding ToFlagImagePath}"
+                                    HeightRequest="80"
+                                    Aspect="AspectFit">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                Tapped="ShowAvailableCurrencies"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Frame Style="{StaticResource CustomFrameStyle}">
                                     <Entry
                                         x:Name="outExchange"
-                                        Background="#FFF1EEEE"
+                                        Style="{StaticResource CustomEntryStyle}"
                                         Placeholder="$0.00"
-                                        FontSize="Large"
-                                        TextColor="Black"
                                         Keyboard="Numeric"
-                                        IsReadOnly="True" />   
+                                        IsReadOnly="True" 
+                                        Text="{Binding ConversionResultText}"/>   
+                                </Frame>
                         </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                        Margin="0,0,20,0"
+                        Spacing="0"
+                        HorizontalOptions="End">
+                            <Label
+                                FontSize="Header"
+                                HorizontalOptions="End" 
+                                Text="Precio de venta sugerido: "/>    
+                            <Label
+                                HorizontalOptions="End"
+                                VerticalOptions="Center">   
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span 
+                                        Text="{Binding RetailPriceText}" 
+                                        FontAttributes="Bold"
+                                        FontSize="Header"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
                     </HorizontalStackLayout>
                     <VerticalStackLayout 
                         Margin="0,60">
@@ -89,7 +131,7 @@
                             <chart:SfCartesianChart.Title>
                                 <Label 
                                     Margin="0,0,0,20"
-                                    Text="Valores de la moneda"
+                                    Text="Valores de las divisas"
                                     HorizontalOptions="Center"/>
                             </chart:SfCartesianChart.Title> 
                             <chart:SfCartesianChart.XAxes>
@@ -101,10 +143,18 @@
                             <chart:LineSeries
                                 ShowMarkers="True"
                                 XBindingPath="Date"
-                                ItemsSource="{Binding Data}"
-                                YBindingPath="Rate"/>
+                                ItemsSource="{Binding FromRates}"
+                                YBindingPath="Rate"
+                                MarkerSettings="{chart:ChartMarkerSettings Width=5}"/>
+                            <chart:LineSeries
+                                ShowMarkers="True"
+                                XBindingPath="Date"
+                                ItemsSource="{Binding ToRates}"
+                                YBindingPath="Rate"
+                                MarkerSettings="{chart:ChartMarkerSettings Width=5}"/>       
                         </chart:SfCartesianChart>
                     </VerticalStackLayout>
+                    <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
                 </VerticalStackLayout>
              </ScrollView>
 </ContentPage>

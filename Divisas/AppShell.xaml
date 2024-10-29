@@ -9,10 +9,7 @@
 
     <TabBar Shell.TabBarBackgroundColor="Transparent" Shell.TabBarTitleColor="#000" Shell.TabBarUnselectedColor="DarkGray" Shell.TabBarForegroundColor="#000">
         <Tab Title="Divisas" Icon="dollar.png" x:Name="currenciesTab" />
-        <Tab Title="Inicio" Icon="home.png">
-            <ShellContent 
-                          ContentTemplate="{DataTemplate local:Views.Home}"/>
-        </Tab>
+        <Tab Title="Inicio" Icon="home.png" x:Name="homeTab" />
         <Tab Title="Menu" Icon="bars.png">
             <ShellContent 
                           ContentTemplate="{DataTemplate local:Views.Config}"/>

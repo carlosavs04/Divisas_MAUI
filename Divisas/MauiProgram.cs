@@ -57,12 +57,15 @@ namespace Divisas
             builder.Services.AddTransient<RateHistoryService>();
             builder.Services.AddTransient<ConfigurationService>();
 
+            builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddTransient<CurrenciesListViewModel>();
             builder.Services.AddTransient<CurrencyDetailViewModel>();
             builder.Services.AddTransient<AddCurrencyViewModel>();
             builder.Services.AddTransient<UpdateCurrencyViewModel>();
+            builder.Services.AddTransient<CurrencySelectorViewModel>(); 
 
             builder.Services.AddTransient<CurrenciesList>();
+            builder.Services.AddTransient<Home>();
 
             //TEST
             //builder.Services.AddTransient<DatabaseViewer>();

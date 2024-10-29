@@ -32,7 +32,6 @@ namespace Divisas.ViewModels
                 OnPropertyChanged(nameof(SuggestedRetailPrice));
                 OnPropertyChanged(nameof(IsEditable));
             }
-
         }
 
         public bool IsLoading
