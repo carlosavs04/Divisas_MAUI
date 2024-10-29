@@ -17,7 +17,8 @@
             <Setter Property="HasShadow" Value="False" />
         </Style>
     </ContentPage.Resources>
-    <ScrollView>
+        <ScrollView
+            Background="{AppThemeBinding Dark=Black,Light=White}">
                 <VerticalStackLayout>
                     <Image
                         WidthRequest="200"
@@ -107,7 +108,7 @@
                             FontSize="18"
                             Padding="40,0"
                             VerticalOptions="Center"
-                            BackgroundColor="DodgerBlue"
+                            Background="DodgerBlue"
                             HorizontalOptions="Center"
                             Clicked="OnSaveClicked"
                             IsEnabled="{Binding CanSave}"/>

@@ -4,7 +4,7 @@
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              x:Class="Divisas.Views.Home"
              Title="Home">
-             <ScrollView>
+             <ScrollView Background="{AppThemeBinding Dark=Black,Light=White}">
                 <VerticalStackLayout>
                     <Label 
                         Text="Tipo de cambio"

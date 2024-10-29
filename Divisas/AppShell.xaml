@@ -7,15 +7,22 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Divisas">
 
-    <TabBar Shell.TabBarBackgroundColor="Transparent" Shell.TabBarTitleColor="#000" Shell.TabBarUnselectedColor="DarkGray" Shell.TabBarForegroundColor="#000">
-        <Tab Title="Divisas" Icon="dollar.png" x:Name="currenciesTab" />
-        <Tab Title="Inicio" Icon="home.png">
-            <ShellContent 
-                          ContentTemplate="{DataTemplate local:Views.Home}"/>
+    <TabBar Shell.TabBarBackgroundColor="{AppThemeBinding Dark=Black, Light=White}"
+            Shell.TabBarTitleColor="{AppThemeBinding Dark=White, Light=Black}"
+            Shell.TabBarUnselectedColor="DarkGray"
+            Shell.TabBarForegroundColor="{AppThemeBinding Dark=White, Light=Black}">
+        <Tab Title="Divisas"
+                Icon="dollar.png"
+                x:Name="currenciesTab"/>
+        <Tab Title="Inicio"
+                Icon="home.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:Views.Home}"/>
         </Tab>
-        <Tab Title="Menu" Icon="bars.png">
-            <ShellContent 
-                          ContentTemplate="{DataTemplate local:Views.Config}"/>
-        </Tab> 
+        <Tab Title="Menu"
+                Icon="bars.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:Views.Config}"/>
+        </Tab>
     </TabBar>
 </Shell>

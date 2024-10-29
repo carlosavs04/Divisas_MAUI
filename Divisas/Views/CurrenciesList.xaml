@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Divisas.Views.CurrenciesList"
              Title="Mis divisas">
-            <AbsoluteLayout> 
+            <AbsoluteLayout
+            Background="{AppThemeBinding Dark=Black, Light=White}"> 
                 <ScrollView
                     WidthRequest="400"
-                    HeightRequest="1000">
-                   <VerticalStackLayout Background="White">
+                    HeightRequest="600"
+                    Background="{AppThemeBinding Dark=Black, Light=White}">
+                   <VerticalStackLayout
+                   Background="{AppThemeBinding Dark=Black, Light=White}">
                        <HorizontalStackLayout
                            HorizontalOptions="Center"
                            Spacing="100"
@@ -25,18 +28,19 @@
                            </Label>
                        </HorizontalStackLayout>
                        <SearchBar
+                       Background="{AppThemeBinding Light=White, Dark=Black}"
                            Placeholder="Buscar divisa..."
                            Text="{Binding SearchText, Mode=TwoWay}"
                            HeightRequest="40"
                            FontSize="14"
-                           Margin="0,0,0,25"
-                           Background="White"/>
+                           Margin="0,0,0,25" />
                        <Label Margin="10,0,0,0"
                            Text="DIVISAS"
                            FontSize="14"
                            FontAttributes="Bold"
                            TextColor="Gray"/>
                        <ListView x:Name="CurrenciesListView"
+                       Background="{AppThemeBinding Light=White, Dark=Black}"
                            ItemsSource="{Binding FilteredCurrencies}"
                            RowHeight="70">
                            <ListView.ItemTemplate>
@@ -66,7 +70,7 @@
                 <Button 
                     Text="+" 
                     FontSize="60"
-                    BackgroundColor="White"
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
                     TextColor="DodgerBlue"
                     WidthRequest="60"
                     HeightRequest="60"

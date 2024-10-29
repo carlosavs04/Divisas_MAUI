@@ -17,7 +17,7 @@
             <Setter Property="HasShadow" Value="False" />
         </Style>
     </ContentPage.Resources>
-    <ScrollView>
+    <ScrollView Background="{AppThemeBinding Dark=Black, Light=White}">
         <VerticalStackLayout>
             <Image
                 WidthRequest="200"
