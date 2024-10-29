@@ -17,7 +17,8 @@
             <Setter Property="HasShadow" Value="False" />
         </Style>
     </ContentPage.Resources>
-    <ScrollView>
+    <ScrollView
+        Background="{AppThemeBinding Dark=Black, Light=White}">
         <VerticalStackLayout>
             <Image
                 WidthRequest="200"
@@ -183,12 +184,18 @@
                     Text="Eliminar"
                     TextColor="White"
                     FontSize="18"
-                    Padding="40,0"
                     VerticalOptions="Center"
                     BackgroundColor="Red"
                     HorizontalOptions="Center"
+                    WidthRequest="150"
+                    HeightRequest="40"
                     IsVisible="{Binding IsEditable}"
-                    Command="{Binding DeleteCurrencyCommand}"/>
+                    Command="{Binding DeleteCurrencyCommand}"> 
+                    <Button.ImageSource>
+                        <FileImageSource 
+                            File="trash.png"/>
+                    </Button.ImageSource>
+                </Button>
             </HorizontalStackLayout>
             <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
         </VerticalStackLayout>

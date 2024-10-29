@@ -17,5 +17,12 @@ public partial class Config : ContentPage
 		};
 
 		currencyPicker.ItemsSource = currencies;
+
+		themeSwitch.IsToggled = App.Current.RequestedTheme == AppTheme.Dark;
+	}
+
+	private void OnThemeSwitch(object sender, ToggledEventArgs e)
+	{
+		App.Current.UserAppTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
 	}
 }

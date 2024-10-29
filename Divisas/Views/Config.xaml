@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Divisas.Views.Config"
              Title="Configuración">
-             <ScrollView>
-                <VerticalStackLayout Background="White">
+             <ScrollView Background="{AppThemeBinding Dark=Black, Light=White}">
+                <VerticalStackLayout>
                     <Label Margin="20,20,0,0"
                         Text="Configuración"
                         FontSize="18"
@@ -16,7 +16,9 @@
                         Text="Cambiar tema"
                         Margin="0,5"
                         FontSize="16"/>
-                        <Switch IsToggled="true"
+                        <Switch 
+                            x:Name="themeSwitch"
+                            Toggled="OnThemeSwitch"
                             ThumbColor="DodgerBlue"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout

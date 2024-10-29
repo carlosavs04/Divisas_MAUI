@@ -5,7 +5,8 @@
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              ios:Page.ModalPresentationStyle="FormSheet"
              Title="Divisas">
-    <ScrollView>
+    <ScrollView 
+        Background="{AppThemeBinding Dark=Black, Light=White}">
         <VerticalStackLayout
             Margin="20">
             <Label
