@@ -15,6 +15,12 @@ namespace Divisas
 
             SeedDatabase.Initialize(serviceProvider);
 
+            var configService = serviceProvider.GetRequiredService<ConfigurationService>();
+            bool isDarkMode = configService.GetDarkMode();
+
+            if (App.Current != null)
+                App.Current.UserAppTheme = isDarkMode ? AppTheme.Dark : AppTheme.Light;
+
             MainPage = new AppShell(_serviceProvider);
         }
 

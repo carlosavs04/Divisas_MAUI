@@ -33,10 +33,16 @@ namespace Divisas.Services
 
         public async Task SetBaseCurrencyAsync(int newCurrencyId)
         {
-            var currentBaseCurrency = await _ctx.Currencies.FirstOrDefaultAsync(i => i.IsBase);
+            var currencies = await _ctx.Currencies.ToListAsync();
+            var currentBaseCurrency = currencies.FirstOrDefault(i => i.IsBase);
 
             if (currentBaseCurrency != null)
+            {
+                if (currentBaseCurrency.Id == newCurrencyId)
+                    return;
+
                 currentBaseCurrency.IsBase = false;
+            }
 
             var newBaseCurrency = await _ctx.Currencies.FindAsync(newCurrencyId);
 
@@ -44,17 +50,18 @@ namespace Divisas.Services
                 throw new InvalidOperationException();
 
             newBaseCurrency.IsBase = true;
+            await _ctx.SaveChangesAsync();
+
+            await RecalculateRatesForBaseCurrencyChangeAsync(newCurrencyId);
 
             var baseRateHistory = new DataAccess.Entities.ExchangeRateHistory
             {
-                CurrencyId = newBaseCurrency.Id,
+                CurrencyId = newCurrencyId,
                 Rate = 1,
                 Date = DateTime.Now
             };
-
             _ctx.ExchangeRateHistory.Add(baseRateHistory);
             await _ctx.SaveChangesAsync();
-            await RecalculateRatesForBaseCurrencyChangeAsync(newCurrencyId);
         }
 
         public async Task RecalculateRatesForBaseCurrencyChangeAsync(int newCurrencyId)
@@ -65,6 +72,7 @@ namespace Divisas.Services
                 return;
 
             var currencies = await _ctx.Currencies.Where(i => i.IsActive && i.Id != newCurrencyId).ToListAsync();
+            var conversionFactor = 1 / newBaseRate;
 
             foreach (var currency in currencies)
             {
@@ -75,7 +83,7 @@ namespace Divisas.Services
 
                 foreach (var rate in lastRates)
                 {
-                    rate.Rate = rate.Rate / newBaseRate;
+                    rate.Rate = rate.Rate * conversionFactor;
                 }
 
                 await _ctx.SaveChangesAsync();

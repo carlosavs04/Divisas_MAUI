@@ -14,9 +14,6 @@
         Shell.TabBarForegroundColor="{AppThemeBinding Dark=White, Light=Black}">
         <Tab Title="Divisas" Icon="dollar.png" x:Name="currenciesTab" />
         <Tab Title="Inicio" Icon="home.png" x:Name="homeTab" />
-        <Tab Title="Menu" Icon="bars.png">
-            <ShellContent 
-                          ContentTemplate="{DataTemplate local:Views.Config}"/>
-        </Tab> 
+        <Tab Title="Menu" Icon="bars.png" x:Name="configTab" />
     </TabBar>
 </Shell>

@@ -62,10 +62,12 @@ namespace Divisas
             builder.Services.AddTransient<CurrencyDetailViewModel>();
             builder.Services.AddTransient<AddCurrencyViewModel>();
             builder.Services.AddTransient<UpdateCurrencyViewModel>();
-            builder.Services.AddTransient<CurrencySelectorViewModel>(); 
+            builder.Services.AddTransient<CurrencySelectorViewModel>();
+            builder.Services.AddTransient<ConfigurationViewModel>();
 
             builder.Services.AddTransient<CurrenciesList>();
             builder.Services.AddTransient<Home>();
+            builder.Services.AddTransient<Config>();
 
             //TEST
             //builder.Services.AddTransient<DatabaseViewer>();

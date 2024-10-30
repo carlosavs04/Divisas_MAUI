@@ -146,8 +146,8 @@ namespace Divisas.ViewModels
 
             var result = Math.Round(toRate / fromRate, 3);
 
-            //ConversionResult = null;
-            //AmountToConvert = 0;
+            ConversionResult = null;
+            AmountToConvert = 0;
             ActualRate = result;
 
             OnPropertyChanged(nameof(ConversionText));

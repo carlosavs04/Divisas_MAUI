@@ -42,6 +42,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -22,5 +22,6 @@ namespace Divisas.Utils
         public AddCurrencyViewModel AddCurrencyViewModel => _serviceProvider.GetRequiredService<AddCurrencyViewModel>();
         public UpdateCurrencyViewModel UpdateCurrencyViewModel => _serviceProvider.GetRequiredService<UpdateCurrencyViewModel>();
         public CurrencySelectorViewModel CurrencySelectorViewModel => _serviceProvider.GetRequiredService<CurrencySelectorViewModel>();
+        public ConfigurationViewModel ConfigurationViewModel => _serviceProvider.GetRequiredService<ConfigurationViewModel>();
     }
 }

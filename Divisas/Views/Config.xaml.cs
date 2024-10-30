@@ -1,28 +1,39 @@
 using System.Globalization;
 using Divisas.Models;
+using Divisas.Utils;
+using Divisas.ViewModels;
 
 namespace Divisas.Views;
 
 public partial class Config : ContentPage
 {
-	public Config()
-	{
-		InitializeComponent();
+	private ConfigurationViewModel _viewModel;
+	private IServiceProvider _serviceProvider;
 
-		List<Currency> currencies = new List<Currency>
-		{
-				new Currency { Code = "USD", Name = "United States Dollar" },
-				new Currency { Code = "EUR", Name = "Euro" },
-				new Currency { Code = "MXN", Name = "Mexican Peso" },
-		};
+    public Config(IServiceProvider serviceProvider)
+    {
+        InitializeComponent();
+        _serviceProvider = serviceProvider;
+        var locator = serviceProvider.GetRequiredService<ViewModelLocator>();
+        _viewModel = locator.ConfigurationViewModel;
+        BindingContext = _viewModel;
+    }
 
-		currencyPicker.ItemsSource = currencies;
+    protected override void OnAppearing()
+    {
+        _viewModel.IsLoading = false;
+        base.OnAppearing();
 
-		themeSwitch.IsToggled = App.Current.RequestedTheme == AppTheme.Dark;
-	}
+        if (!_viewModel.IsLoading && _viewModel.Currencies.Count == 0)
+            _viewModel.LoadCurrenciesCommand.Execute(null);
+    }
 
-	private void OnThemeSwitch(object sender, ToggledEventArgs e)
-	{
-		App.Current.UserAppTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
-	}
+    private void OnCurrencyChanged(object sender, EventArgs e)
+    {
+        if (_viewModel.ChangeBaseCurrencyCommand.CanExecute(null))
+        {
+            _viewModel.ChangeBaseCurrencyCommand.Execute(null);
+        }
+    }
+
 }

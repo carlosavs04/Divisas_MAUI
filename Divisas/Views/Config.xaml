@@ -18,22 +18,23 @@
                         FontSize="16"/>
                         <Switch 
                             x:Name="themeSwitch"
-                            Toggled="OnThemeSwitch"
+                            IsToggled="{Binding IsDarkMode, Mode=TwoWay}"
                             ThumbColor="DodgerBlue"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout
                             Margin="20,10"
                             Spacing="170">
                         <Label 
-                            Text="Moneda base"
+                            Text="Divisa base"
                             FontSize="16"
                             Margin="0,5"/>
                         <Picker x:Name="currencyPicker"
-                            Title="Moneda"
-                            ItemsSource="{Binding currencies}"
-                            ItemDisplayBinding="{Binding Code}">
-                        </Picker>
+                            ItemsSource="{Binding Currencies}"
+                            ItemDisplayBinding="{Binding Code}"
+                            SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                            SelectedIndexChanged="OnCurrencyChanged" />
                     </HorizontalStackLayout>
+                    <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
                 </VerticalStackLayout>
              </ScrollView>
 </ContentPage>
