@@ -1,9 +1,14 @@
+using Divisas.ViewModels;
+
 namespace Divisas.Views;
 
 public partial class Ticket : ContentPage
 {
-	public Ticket()
+	private HomeViewModel _homeViewModel;
+	public Ticket(HomeViewModel homeViewModel)
 	{
 		InitializeComponent();
-	}
+		_homeViewModel = homeViewModel;
+        BindingContext = _homeViewModel;
+    }
 }

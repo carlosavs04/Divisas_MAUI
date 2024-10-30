@@ -56,6 +56,6 @@ public partial class Home : ContentPage
 
 	private void GenerateTicket(object sender, EventArgs e)
 	{
-		   Navigation.PushModalAsync(new Ticket());
+		   Navigation.PushModalAsync(new Ticket(_viewModel));
 	}
 }

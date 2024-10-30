@@ -12,7 +12,7 @@
                 FontSize="24">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Exchange Ticket"
+                        <Span Text="Ticket de conversión"
                         FontAttributes="Bold"/>
                     </FormattedString>
                 </Label.FormattedText>
@@ -35,7 +35,7 @@
                     IsClippedToBounds="True"
                     Padding="0">
                     <Image
-                        Source="us_flag.png"
+                        Source="{Binding FromFlagImagePath}"
                         HeightRequest="150"
                         WidthRequest="150"
                         Aspect="AspectFit"
@@ -43,10 +43,10 @@
                         HorizontalOptions="Center"/>
                 </Frame>
                 <Label
-                    Text="USD"
+                    Text="{Binding FromCode}"
                     HorizontalOptions="Center"
                     FontSize="20"/>
-                <Label Text="From"
+                <Label Text="De"
                     HorizontalOptions="Center"/>
             </VerticalStackLayout>              
             <VerticalStackLayout
@@ -68,7 +68,7 @@
                     IsClippedToBounds="True"
                     Padding="0">
                     <Image
-                        Source="us_flag.png"
+                        Source="{Binding ToFlagImagePath}"
                         HeightRequest="150"
                         WidthRequest="150"
                         Aspect="AspectFit"
@@ -76,10 +76,10 @@
                         HorizontalOptions="Center"/>
                 </Frame>
                 <Label
-                    Text="USD"
+                    Text="{Binding ToCode}"
                     HorizontalOptions="Center"
                     FontSize="20"/>
-                <Label Text="To"
+                <Label Text="A"
                     HorizontalOptions="Center"/>
             </VerticalStackLayout>          
             </HorizontalStackLayout>
@@ -89,10 +89,10 @@
                 Spacing="180"
                 Margin="10,10">
                 <Label
-                    Text="Amount"
+                    Text="Cantidad ingresada"
                     FontSize="16"/>
                 <Label
-                    Text="$100"
+                    Text="{Binding AmountToConvert}"
                     FontSize="16"
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
@@ -101,10 +101,10 @@
             Spacing="130"
             Margin="10,10">
                 <Label
-                    Text="Exchange Rate"
+                    Text="Valor de conversión"
                     FontSize="16"/>
                 <Label
-                    Text="$100"
+                    Text="{Binding ConversionText}"
                     FontSize="16"
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
@@ -114,14 +114,14 @@
                 Spacing="140"
                 Margin="10,10">
                 <Label
-                    Text="Total Amount"
+                    Text="Cantidad total"
                     FontSize="16"/>
                 <Label
                     FontSize="16"
                     HorizontalOptions="End">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="$100"
+                            <Span Text="{Binding ConversionResultText}"
                             FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
