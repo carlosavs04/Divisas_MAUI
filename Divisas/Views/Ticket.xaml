@@ -83,8 +83,8 @@
             </HorizontalStackLayout>
             <Frame HeightRequest="1"/>
             <HorizontalStackLayout
-                WidthRequest="300"
-                Spacing="180"
+                WidthRequest="340"
+                Spacing="200"
                 Margin="10,10">
                 <Label
                     Text="Cantidad"
@@ -95,8 +95,8 @@
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout
-            WidthRequest="300"
-            Spacing="130"
+            WidthRequest="340"
+            Spacing="50"
             Margin="10,10">
                 <Label
                     Text="Tipo de cambio"
@@ -108,8 +108,8 @@
             </HorizontalStackLayout>
             <Frame HeightRequest="1"/>
             <HorizontalStackLayout
-                WidthRequest="300"
-                Spacing="140"
+                WidthRequest="340"
+                Spacing="110"
                 Margin="10,10">
                 <Label
                     Text="Cantidad total"
@@ -126,8 +126,8 @@
                 </Label>
             </HorizontalStackLayout>
             <HorizontalStackLayout
-            WidthRequest="300"
-            Spacing="150"
+            WidthRequest="340"
+            Spacing="140"
             Margin="10,10">
                 <Label
                     Text="{Binding FromValueLabel}"
@@ -138,8 +138,8 @@
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout
-            WidthRequest="300"
-            Spacing="150"
+            WidthRequest="340"
+            Spacing="130"
             Margin="10,10">
                 <Label
                     Text="{Binding ToValueLabel}"
@@ -150,8 +150,8 @@
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout
-            WidthRequest="300"
-            Spacing="130"
+            WidthRequest="340"
+            Spacing="150"
             Margin="10,10">
                 <Label
                     Text="Precio de venta"
@@ -162,9 +162,9 @@
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout
-            WidthRequest="300"
-            Spacing="110"
-            Margin="10,10">
+                WidthRequest="340"
+                Spacing="180"
+                Margin="10,10">
                 <Label
                     Text="No. de ticket"
                     FontSize="16"/>
