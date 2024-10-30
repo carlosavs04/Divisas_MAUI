@@ -61,6 +61,7 @@
                                         Style="{StaticResource CustomEntryStyle}"
                                         Text="{Binding AmountToConvert}"
                                         Keyboard="Numeric"
+                                        TextColor="Black"
                                         Placeholder="$0.00"
                                         Unfocused="UnfocusAmount"/>
                                 </Frame>
@@ -100,6 +101,7 @@
                                         Placeholder="$0.00"
                                         Keyboard="Numeric"
                                         IsReadOnly="True" 
+                                        TextColor="Black"
                                         Text="{Binding ConversionResultText}"/>   
                                 </Frame>
                         </VerticalStackLayout>
@@ -125,6 +127,15 @@
                             </Label.FormattedText>
                         </Label>
                     </HorizontalStackLayout>
+                    <Button 
+                        Text="Generar Ticket"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        FontSize="16"
+                        Margin="10,40,10,0"
+                        FontFamily="Arial"
+                        HorizontalOptions="End"
+                        Pressed="GenerateTicket" />
                     <VerticalStackLayout 
                         Margin="0,60">
                         <chart:SfCartesianChart

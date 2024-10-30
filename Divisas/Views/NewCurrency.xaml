@@ -55,7 +55,8 @@
                             <Entry
                                 Placeholder="Código de la divisa"
                                 Style="{StaticResource CustomEntryStyle}"
-                                Text="{Binding Code}"/>
+                                Text="{Binding Code}"
+                                TextColor="{AppThemeBinding Dark=Black,Light=Black}"/>
                         </Frame>
                         <Label 
                             Margin="10,10,10,0" 
@@ -70,7 +71,8 @@
                             <Entry
                                 Placeholder="Nombre de la divisa"
                                 Style="{StaticResource CustomEntryStyle}"
-                                Text="{Binding Name}"/>
+                                Text="{Binding Name}"
+                                TextColor="{AppThemeBinding Dark=Black,Light=Black}"/>
                         </Frame>
                             <Label 
                                 Margin="10,10,10,0" 
@@ -87,7 +89,8 @@
                                 Placeholder="0.00"
                                 Style="{StaticResource CustomEntryStyle}" 
                                 Text="{Binding ActualRate, StringFormat='{}{0:0.###}'}"
-                                Keyboard="Numeric"/>
+                                Keyboard="Numeric"
+                                TextColor="{AppThemeBinding Dark=Black,Light=Black}"/>
                         </Frame>
                     </VerticalStackLayout>
                     <HorizontalStackLayout 

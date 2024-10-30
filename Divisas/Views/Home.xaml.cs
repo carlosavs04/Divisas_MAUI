@@ -53,4 +53,9 @@ public partial class Home : ContentPage
 
         _viewModel.ConvertCurrencyCommand.Execute(null);
     }
+
+	private void GenerateTicket(object sender, EventArgs e)
+	{
+		   Navigation.PushModalAsync(new Ticket());
+	}
 }

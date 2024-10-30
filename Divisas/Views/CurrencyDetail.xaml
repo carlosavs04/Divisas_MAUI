@@ -89,7 +89,8 @@
                         <Entry
                             Text="{Binding Code}"
                             Style="{StaticResource CustomEntryStyle}"
-                            IsReadOnly="True" />
+                            IsReadOnly="True" 
+                            TextColor="{AppThemeBinding Dark=Black,Light=Black}"/>
                         <Image Source="pen_solid.svg"
                                WidthRequest="20"
                                HeightRequest="20"
@@ -123,7 +124,8 @@
                         <Entry
                             Text="{Binding Name}"
                             Style="{StaticResource CustomEntryStyle}"
-                            IsReadOnly="True"/>
+                            IsReadOnly="True"
+                            TextColor="{AppThemeBinding Dark=Black,Light=Black}"/>
                         <Image Source="pen_solid.svg"
                            WidthRequest="20"
                            HeightRequest="20"
@@ -159,7 +161,8 @@
                         <Entry
                         Text="{Binding ActualRate}"
                         Style="{StaticResource CustomEntryStyle}"
-                        IsReadOnly="True"/>
+                        IsReadOnly="True"
+                        TextColor="{AppThemeBinding Dark=Black,Light=Black}"/>
                         <Image Source="pen_solid.svg"
                            WidthRequest="20"
                            HeightRequest="20"
