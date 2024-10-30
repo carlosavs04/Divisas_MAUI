@@ -135,7 +135,8 @@
                         Margin="10,40,10,0"
                         FontFamily="Arial"
                         HorizontalOptions="End"
-                        Command="{Binding GenerateTicketCommand}" />
+                        Command="{Binding GenerateTicketCommand}"
+                        IsEnabled="{Binding CanGenerateTicket}"/>
                     <VerticalStackLayout 
                         Margin="0,60">
                         <chart:SfCartesianChart

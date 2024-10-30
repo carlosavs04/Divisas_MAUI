@@ -117,7 +117,11 @@ namespace Divisas.ViewModels
         public Models.ConversionResult? ConversionResult
         {
             get => _conversionResult;
-            set => SetProperty(ref _conversionResult, value);
+            set 
+            { 
+                SetProperty(ref _conversionResult, value); 
+                OnPropertyChanged(nameof(CanGenerateTicket));
+            }
         }
 
         public string FromFlagImagePath => FromCurrency != null ? FromCurrency.Flag != null && FromCurrency.Flag.EndsWith(".png") ? FromCurrency.Flag : $"{FromCurrency.Flag}.png" : "default_flag.png";
@@ -131,6 +135,7 @@ namespace Divisas.ViewModels
         public string TotalWithCurrency => ConversionResult != null ? $"{ConversionResult.ConvertedAmount.ToString("C3")} {ToCode}" : "$0.00";
         public string FromValueLabel => $"Valor en {BaseCurrency} ({FromCode})";
         public string ToValueLabel => $"Valor en {BaseCurrency} ({ToCode})";
+        public bool CanGenerateTicket => ConversionResult != null && ConversionResult.ConvertedAmount > 0;
 
 
         public HomeViewModel(CurrencyService currencyService, RateHistoryService rateHistoryService, ConfigurationService configService) : base(configService)
@@ -139,6 +144,8 @@ namespace Divisas.ViewModels
             _rateHistoryService = rateHistoryService;
             _amountToConvert = 0;
             _retailPrice = 0;
+            _fromRate = "$0.00";
+            _toRate = "$0.00";
             _currentDate = DateTime.Now.ToString("dd/MM/yy");
             _currentTime = DateTime.Now.ToString("HH:mm:ss");
             FromRates = new ObservableCollection<Models.ExchangeRateHistory>();
