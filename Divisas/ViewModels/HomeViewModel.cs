@@ -1,4 +1,5 @@
 ﻿using Divisas.Services;
+using Divisas.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,12 +22,17 @@ namespace Divisas.ViewModels
         private decimal _actualRate;
         private decimal _amountToConvert;
         private decimal _retailPrice;
+        private string _fromRate;
+        private string _toRate;
+        private string _currentDate;
+        private string _currentTime;
 
         public ObservableCollection<Models.ExchangeRateHistory> FromRates { get; private set; }
         public ObservableCollection<Models.ExchangeRateHistory> ToRates { get; private set; }
         public ICommand InitCurrenciesCommand { get; }
         public ICommand UpdateCurrenciesRatesCommand { get; }
         public ICommand ConvertCurrencyCommand { get; }
+        public ICommand GenerateTicketCommand { get; }
 
         public bool IsLoading
         {
@@ -46,6 +52,18 @@ namespace Divisas.ViewModels
             set => SetProperty(ref _actualRate, value);
         }
 
+        public string FromRate
+        {
+            get => _fromRate;
+            set => SetProperty(ref _fromRate, value);
+        }
+
+        public string ToRate
+        {
+            get => _toRate;
+            set => SetProperty(ref _toRate, value);
+        }
+
         public decimal AmountToConvert
         {
             get => _amountToConvert;
@@ -58,6 +76,18 @@ namespace Divisas.ViewModels
             set => SetProperty(ref _retailPrice, value);
         }
 
+        public string CurrentDate
+        {
+            get => _currentDate;
+            set => SetProperty(ref _currentDate, value);
+        }
+
+        public string CurrentTime
+        {
+            get => _currentTime;
+            set => SetProperty(ref _currentTime, value);
+        }
+
         public Models.Currency? FromCurrency
         {
             get => _fromCurrency;
@@ -67,6 +97,7 @@ namespace Divisas.ViewModels
                 OnPropertyChanged(nameof(FromFlagImagePath));
                 OnPropertyChanged(nameof(FromCode));
                 OnPropertyChanged(nameof(ActualRate));
+                OnPropertyChanged(nameof(FromRate));
             }
         }
 
@@ -79,6 +110,7 @@ namespace Divisas.ViewModels
                 OnPropertyChanged(nameof(ToFlagImagePath));
                 OnPropertyChanged(nameof(ToCode));
                 OnPropertyChanged(nameof(ActualRate));
+                OnPropertyChanged(nameof(ToRate));
             }
         }
 
@@ -95,6 +127,11 @@ namespace Divisas.ViewModels
         public string ConversionText => $"$1 {FromCode} = {ActualRate} {ToCode}";
         public string ConversionResultText => ConversionResult != null ? ConversionResult.ConvertedAmount.ToString("C3") : "$0.00";
         public string RetailPriceText => ConversionResult != null ? ConversionResult.SuggestedRetailPrice.ToString("C3") : "$0.00";
+        public string AmountWithCurrency => $"{AmountToConvert} {FromCode}";
+        public string TotalWithCurrency => ConversionResult != null ? $"{ConversionResult.ConvertedAmount.ToString("C3")} {ToCode}" : "$0.00";
+        public string FromValueLabel => $"Valor en {BaseCurrency} ({FromCode})";
+        public string ToValueLabel => $"Valor en {BaseCurrency} ({ToCode})";
+
 
         public HomeViewModel(CurrencyService currencyService, RateHistoryService rateHistoryService, ConfigurationService configService) : base(configService)
         {
@@ -102,11 +139,14 @@ namespace Divisas.ViewModels
             _rateHistoryService = rateHistoryService;
             _amountToConvert = 0;
             _retailPrice = 0;
+            _currentDate = DateTime.Now.ToString("dd/MM/yy");
+            _currentTime = DateTime.Now.ToString("HH:mm:ss");
             FromRates = new ObservableCollection<Models.ExchangeRateHistory>();
             ToRates = new ObservableCollection<Models.ExchangeRateHistory>();
             InitCurrenciesCommand = new Command(async () => await InitializeDefaultCurrencies());
             UpdateCurrenciesRatesCommand = new Command(async () => await UpdateCurrencyRates());
             ConvertCurrencyCommand = new Command(async () => await ConvertCurrencyAmount());
+            GenerateTicketCommand = new Command(GenerateTicket);
         }
 
         private async Task InitializeDefaultCurrencies()
@@ -146,6 +186,8 @@ namespace Divisas.ViewModels
 
             var result = Math.Round(toRate / fromRate, 3);
 
+            FromRate = fromRate.ToString("C3");
+            ToRate = toRate.ToString("C3");
             ConversionResult = null;
             AmountToConvert = 0;
             ActualRate = result;
@@ -154,6 +196,8 @@ namespace Divisas.ViewModels
             OnPropertyChanged(nameof(AmountToConvert));
             OnPropertyChanged(nameof(ConversionResultText));
             OnPropertyChanged(nameof(RetailPriceText));
+            OnPropertyChanged(nameof(AmountWithCurrency));
+            OnPropertyChanged(nameof(TotalWithCurrency));
         }
 
         private async Task ConvertCurrencyAmount()
@@ -171,6 +215,8 @@ namespace Divisas.ViewModels
 
                 OnPropertyChanged(nameof(ConversionResultText));
                 OnPropertyChanged(nameof(RetailPriceText));
+                OnPropertyChanged(nameof(AmountWithCurrency));
+                OnPropertyChanged(nameof(TotalWithCurrency));
 
                 await GetCurrencyLastRates();
             }
@@ -202,6 +248,15 @@ namespace Divisas.ViewModels
             {
                 ToRates.Add(rate);
             }
+        }
+
+        private void GenerateTicket()
+        {
+            CurrentDate = DateTime.Now.ToString("dd/MM/yy");
+            CurrentTime = DateTime.Now.ToString("HH:mm:ss");
+
+            if (Application.Current != null && Application.Current.MainPage != null)
+                Application.Current.MainPage.Navigation.PushModalAsync(new Ticket(this));
         }
     }
 }

@@ -128,14 +128,14 @@
                         </Label>
                     </HorizontalStackLayout>
                     <Button 
-                        Text="Generar Ticket"
+                        Text="Generar ticket"
                         BackgroundColor="DodgerBlue"
                         TextColor="White"
                         FontSize="16"
                         Margin="10,40,10,0"
                         FontFamily="Arial"
                         HorizontalOptions="End"
-                        Pressed="GenerateTicket" />
+                        Command="{Binding GenerateTicketCommand}" />
                     <VerticalStackLayout 
                         Margin="0,60">
                         <chart:SfCartesianChart

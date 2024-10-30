@@ -11,4 +11,12 @@ public partial class Ticket : ContentPage
 		_homeViewModel = homeViewModel;
         BindingContext = _homeViewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        DateLabel.Text = _homeViewModel.CurrentDate;
+        TimeLabel.Text = _homeViewModel.CurrentTime;
+    }
 }

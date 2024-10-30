@@ -18,10 +18,8 @@
                 </Label.FormattedText>
             </Label>
             <HorizontalStackLayout Spacing="10">
-                <Label
-                    Text="29/10/24"/>
-                <Label
-                    Text="19:52:03"/>
+                <Label x:Name="DateLabel" />
+                <Label x:Name="TimeLabel"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout
             HorizontalOptions="Center">
@@ -89,10 +87,10 @@
                 Spacing="180"
                 Margin="10,10">
                 <Label
-                    Text="Cantidad ingresada"
+                    Text="Cantidad"
                     FontSize="16"/>
                 <Label
-                    Text="{Binding AmountToConvert}"
+                    Text="{Binding AmountWithCurrency}"
                     FontSize="16"
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
@@ -101,7 +99,7 @@
             Spacing="130"
             Margin="10,10">
                 <Label
-                    Text="Valor de conversión"
+                    Text="Tipo de cambio"
                     FontSize="16"/>
                 <Label
                     Text="{Binding ConversionText}"
@@ -121,7 +119,7 @@
                     HorizontalOptions="End">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding ConversionResultText}"
+                            <Span Text="{Binding TotalWithCurrency}"
                             FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
@@ -132,10 +130,10 @@
             Spacing="150"
             Margin="10,10">
                 <Label
-                    Text="Dollar Value"
+                    Text="{Binding FromValueLabel}"
                     FontSize="16"/>
                 <Label
-                    Text="$100"
+                    Text="{Binding FromRate}"
                     FontSize="16"
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
@@ -144,10 +142,10 @@
             Spacing="150"
             Margin="10,10">
                 <Label
-                    Text="Dollar Value"
+                    Text="{Binding ToValueLabel}"
                     FontSize="16"/>
                 <Label
-                    Text="$100"
+                    Text="{Binding ToRate}"
                     FontSize="16"
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
@@ -156,10 +154,10 @@
             Spacing="130"
             Margin="10,10">
                 <Label
-                    Text="Purchase Value"
+                    Text="Precio de venta"
                     FontSize="16"/>
                 <Label
-                    Text="$100"
+                    Text="{Binding RetailPriceText}"
                     FontSize="16"
                     HorizontalOptions="End"/>
             </HorizontalStackLayout>
@@ -168,7 +166,7 @@
             Spacing="110"
             Margin="10,10">
                 <Label
-                    Text="Ticket Number"
+                    Text="No. de ticket"
                     FontSize="16"/>
                 <Label
                     Text="STK190"
